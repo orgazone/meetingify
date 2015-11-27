@@ -1,0 +1,45 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="http://www.meetingify.com/effective-meetings.php" target="_blank" class="pull-right" translate="LINK.HELP"></a>
+                    <h4 translate="TEXT.STATUS"></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="well">
+                            <table class="table table-striped table-no-border" style="font-size: 1.2em;">
+                                <tr>
+                                    <td style="width: 40%;" translate="TEXT.LAST_SYNC"> </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <span ng-bind="StatusCtrl.last_sync"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%;" translate="TEXT.LOGGED_USER"></td>
+                                    <td>
+                                        <div class="input-group">
+                                           <span ng-bind="StatusCtrl.user"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%;" translate="TEXT.NETWORK_STATUS"> </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <span ng-bind="StatusCtrl.connection"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

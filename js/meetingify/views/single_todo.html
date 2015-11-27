@@ -1,0 +1,109 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><span ng-bind="SingleTodoCtrl.topic"></span></h4>
+                </div>
+                <h4 style="border-bottom-width:0px;   padding-left: 15px;" translate="TEXT.TODOS_BY_PARTICIPANTS"></h4>
+                <div class="panel-body">
+                    <div class="btn-group btn-group-sm pull-right">
+                        <a href="" ng-print print-template="'js/meetingify/views/protocol_print.html'" target="_blank" class="btn btn-default" translate="BUTTON.PRINT_VIEW"></a>
+                    </div>
+                    <BR clear="all">
+                    <div class="bs-example">
+                        <div class="panel-group" id="accordion" ng-model="collapseState" aria-multiselectable="true" >
+                            <div class="panel panel-default" ng-repeat="membersAndTodos in SingleTodoCtrl.todos track by membersAndTodos.member.userid == 0? membersAndTodos.member.ID:membersAndTodos.member.userid">
+                                <button ng-disabled="membersAndTodos.todos.length==0" style="text-decoration: none; width:100%;" ng-click="collapseState[$index]= !collapseState[$index]" class="btn btn-link" role="link" data-parent="#accordion">
+                                    <div class="panel-heading">
+                                        <div class="pull-left span2 text-primary">{{membersAndTodos.member.fullname==" "?membersAndTodos.member.user_email:membersAndTodos.member.fullname}}</div>
+                                        <div class="pull-right glyphicon span1 text-primary" ng-class="{'glyphicon-chevron-down': collapseState[$index], 'glyphicon-chevron-right': (!collapseState[$index]||membersAndTodos.todos.length==0)}"></div>
+                                    </div>
+                                </button>
+                                <div collapse="!collapseState[$index]">
+                                    <div class="panel-body">
+                                        <table class="table table-striped" style="font-size: 1.2em">
+                                            <thead></thead>
+                                            <tr ng-repeat="todo in membersAndTodos.todos">
+                                                <td  style="width: 75%;">
+                                                    <span>
+                                                        <a href="" ng-click="SingleTodoCtrl.markAsDone(todo)">
+                                                            <span class="glyphicon glyphicon-unchecked" ng-show="todo.status == 'open'"></span>
+                                                            <span class="glyphicon glyphicon glyphicon-check" ng-show="todo.status == 'completed'"></span>
+                                                        </a>
+                                                    </span><span ng-class="todo.status == 'completed'?'todoComplete':''">{{todo.todos}}</span>
+                                                </td>
+                                                <td>
+                                                    {{todo.deadline}}
+                                                </td>
+                                                <td>
+                                                    <div class="pull-right">
+                                                        <a href="" data-toggle="modal" data-target="#edittodo"  ng-click="SingleTodoCtrl.prepareEdit(todo);">
+                                                            <span style="font-size:1.5em;" class="glyphicon glyphicon-edit"></span>
+                                                        </a>&nbsp;
+                                                        <a href="" ng-click="collapseState[$parent.$index] = SingleTodoCtrl.removeTodo(todo.ID,todo.todossub_id,membersAndTodos.todos.length);">
+                                                            <span style="font-size:1.5em;" class="glyphicon glyphicon-trash"></span>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#/single/{{SingleTodoCtrl.meetingId}}" class="pull-left"><button type="button" class="btn btn-primary" translate="BUTTON.BACK"> </button></a>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <a href="" data-toggle="modal" data-target="#edittodo" ng-click="SingleTodoCtrl.newTodo();"  onclick="localStorage['mode'] = 'new';"  class="pull-right btn btn-primary"><span class="glyphicon glyphicon-plus-sign" style="color:#fff"></span> <translate>BUTTON.ADD_TODO</translate></a></div>
+                    </div>
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit to do Modal -->
+<div class="modal fade" id="edittodo" tabindex="-1" role="dialog" aria-labelledby="EditTodo" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form"  id="addTodo" name="myForm" role="form" novalidate ng-submit="SingleTodoCtrl.saveTodo(myForm);">
+                <div class="modal-body">
+                    <div class="well">
+                        <h4 translate="TEXT.ADD_EDIT_TODO"></h4>
+                        <div class="form-group" ng-class="{ 'has-error': myForm.repeatSelect.$invalid }">
+                            <select name="repeatSelect" ng-model="SingleTodoCtrl.todoUser" class="form-control">
+                                <option ng-repeat="member in SingleTodoCtrl.members" value="{{member.userid == 0? member.ID:member.userid}}">{{member.fullname==" "?member.user_email:member.fullname}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': myForm.dateTime.$invalid }">
+                            <a href="" class='input-group date' id='datetimepicker1'
+                               ng-date-time-picker
+                               picker-type="date"
+                               meeting-date="SingleTodoCtrl.meeting.start_date"
+                               ng-model="SingleTodoCtrl.deadline"
+                                    name="dateTime">
+                            </a>
+                        </div>
+                        <div class="form-group text-center" ng-class="{ 'has-error': myForm.todoContent.$invalid }">
+                            <textarea class="form-control input-lg" name="todoContent" rows="5" placeholder="{{'TEXT.ENTER_TODO'|translate}}" id="todo_content" required ng-model="SingleTodoCtrl.todoContent"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" translate="BUTTON.CLOSE"></button>
+                        <button type="submit"  class="btn btn-primary" translate="BUTTON.SAVE"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--  Edit to do Modal -->

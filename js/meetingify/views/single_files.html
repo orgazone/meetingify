@@ -1,0 +1,72 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><span ng-bind="SingleFilesCtrl.topic"></span></h4>
+                </div>
+                <h4 style="border-bottom-width:0px;   padding-left: 15px;" translate="TEXT.FILES"></h4>
+                <div class="panel-body">
+                    <div class="btn-group btn-group-sm pull-right">
+                        <a href="" ng-print print-template="'js/meetingify/views/protocol_print.html'" target="_blank" class="btn btn-default" translate="BUTTON.PRINT_VIEW"></a>
+                    </div>
+                    <table class="table table-striped" style="font-size: 1.2em"  id="filesTable">
+                        <tr ng-repeat="file in SingleFilesCtrl.files">
+                            <td style="width: 30%;"><a ng-href="{{file.url}}" download="{{file.filename}}" target="_blank" >{{file.filename}}</a>
+                            </td>
+                            <td class = "hidden-xs"><translate>TEXT.UPLOADED_BY</translate> <span ng-bind="SingleFilesCtrl.getOwnerName(file.user_id)"></span>
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    <a href="" id="{{file.filessub_id}}" ng-click="SingleFilesCtrl.removeFile(file.ID,file.filessub_id);" >
+                                        <span style="font-size:1.5em;" class="glyphicon glyphicon-trash">
+
+                                        </span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#/single/{{SingleFilesCtrl.meetingId}}" class="pull-left"><button type="button" class="btn btn-primary" translate="BUTTON.BACK"> </button></a>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <a href="" data-toggle="modal" data-target="#uploadfile" onclick="localStorage['mode'] = 'new';"   class="pull-right btn btn-primary"><span class="glyphicon glyphicon-plus-sign" style="color:#fff"></span> <translate>BUTTON.ADD_FILE</translate></a></div>
+                    </div>
+
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Upload File -->
+<div class="modal fade" id="uploadfile" tabindex="-1" role="dialog" aria-labelledby="EditAgenda" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="form"  id="addFile" role="form"  data-toggle="validator" ng-submit="SingleFilesCtrl.uploadFile();">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="well">
+                        <h4 translate="TEXT.UPLOAD_A_FILE"></h4>
+                        <div class="form-group text-center">
+                            <input type="file" class="filestyle"  name="fileUpload" id="fileselect" name="file" data-buttonBefore="true" required />
+                            <br />
+                            <img src="img/ajax_pending.gif" width="40" id="upload_pending" style="display:none" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" translate="BUTTON.CLOSE"></button>
+                    <div class="form-group">
+                        <button type="submit"  class="btn btn-primary" translate="BUTTON.UPLOAD_NOW"></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--  Upload File -->

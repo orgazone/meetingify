@@ -1,0 +1,77 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default" >
+                <div class="panel-heading contains-buttons clearfix ">
+                    <h4 class="pull-left" style="font-weight: bold;"><span ng-bind="SingleCtrl.meeting.topic"></span>
+                    </h4>
+                    <div class="btn-group pull-right">
+                        <a href="" ng-click="SingleCtrl.saveDraft()" id="saveLink" onclick="" >
+                            <button type="button" id="saveButton" class="btn btn-primary ">
+                                <translate>BUTTON.SAVE_DRAFT </translate><i class="glyphicon glyphicon-floppy-disk" style="color:#ffffff;">
+                            </i> </button></a>
+                        <a href="#/single_publish" id="publishLink" onclick="" >
+                            <button type="button" id="publishButton" class="btn btn-primary ">
+                                <translate>BUTTON.PUBLISH</translate>  <i class="glyphicon glyphicon-share" style="color:#ffffff;">
+                            </i> </button></a>
+                    </div>
+                </div>
+                <div class="panel-body" style="padding-top: 3px;">
+                    <h4 style="float:left" translate="TEXT.LOCATION_ALT"></h4><h4 style="border-bottom-width:0px" id="single_location">{{SingleCtrl.meeting.location}}
+                    <span ng-show="SingleCtrl.meeting.status=='edited'" class="label label-info pull-right" translate="LABEL.EDITED"></span>
+                    <span ng-show="SingleCtrl.meeting.status=='pending'" class="label label-warning pull-right" translate="LABEL.DRAFT"></span>
+                    <span ng-show="SingleCtrl.meeting.status=='published'" class="label label-success pull-right" translate="LABEL.PUBLISHED"></span>
+                    <span ng-show="SingleCtrl.loading == 'true'" class="three-quarters-loader pull-right"></span>
+                    </h4>
+                    <div class="clearfix"></div>
+                    <div class="pull-left">
+                        <h5 id="single_startdate">{{SingleCtrl.meeting.start_date}}</h5>
+                    </div>
+                    <div class="pull-right bottom" style="">
+                        <a href="#/single_basics" onclick="" class="pull-left"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-edit" style="color:#ffffff;"> </i> <translate>BUTTON.EDIT</translate></button></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="pull-right">
+                        <div class="btn-group btn-group-sm">
+                            <p class="btn btn-default" style="border: 0px;"><translate>BUTTON.PRINT_VIEW</translate>:</p>
+                            <a href="" ng-print print-template="'js/meetingify/views/agenda_print.html'" target="_blank" class="btn btn-default" translate="TEXT.AGENDA"></a>
+                            <a href="" ng-print print-template="'js/meetingify/views/protocol_print.html'" target="_blank" class="btn btn-default" translate="TEXT.PROTOCOL"></a>
+                        </div>
+                    </div>
+                    <table class="table table-striped" style="font-size: 1.2em; margin-bottom: 0px;">
+                        <tr onclick="window.location='#/single_agenda';" style="cursor: pointer;">
+                            <td><translate>TEXT.AGENDA</translate> (<span id="agenda_count">{{SingleCtrl.meeting.agenda_count}}</span>)</td>
+                        </tr>
+                        <tr onclick="window.location='#/single_participants';" style="cursor: pointer;">
+                            <td><translate>TEXT.PARTICIPANTS</translate> (<span id="participants_count">{{SingleCtrl.meeting.members_count}}</span>)</td>
+                        </tr >
+                        <tr onclick="window.location='#/single_note';" style="cursor: pointer;">
+                            <td><translate>TEXT.NOTES</translate> (<span id="notes_count">{{SingleCtrl.meeting.notes_count}}</span>)</td>
+                        </tr>
+                        <tr onclick="window.location='#/single_todo';" style="cursor: pointer;">
+                            <td ><translate>TEXT.TODOS</translate> (<span id="todos_count">{{SingleCtrl.meeting.todos_count}}</span>)</td>
+                        </tr>
+                        <tr onclick="window.location='#/single_files';" style="cursor: pointer;">
+                            <td ><translate>TEXT.FILES</translate> (<span id="files_count">{{SingleCtrl.meeting.files_count}}</span>)</td>
+                        </tr>
+                        <tr ng-click="SingleCtrl.createIcs()" style="cursor: pointer;">
+                            <td><a href="" translate="LINK.DOWNLOAD_ICS"></a></td>
+                        </tr>
+                    </table>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#/meetings" class="pull-left"><button type="button" class="btn btn-primary" translate="BUTTON.BACK"> </button></a>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <button type="button" ng-disabled="!SingleCtrl.editPermissions" ng-click="SingleCtrl.deleteMeeting()" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-trash" style="color:#ffffff;"> </i>  <translate>BUTTON.DELETE_MEETING</translate></button>
+                        </div>
+                    </div>
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><span ng-bind="SinglePublishCtrl.topic"></span></h4>
+                </div>
+                <form id="meetBasics">
+                    <div class="panel-body">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="well">
+                                <form class="form">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <div class="form-group text-center ">
+                                                <BR clear="all">
+                                                <BR clear="all">
+                                            <span class="addtocalendar atc-style-blue">
+                                                <var class="atc_event">
+                                                    <var class="atc_date_start" id="atc_date_start" ng-bind="SinglePublishCtrl.calendarInfo.atc_date_start"></var>
+                                                    <var class="atc_date_end" id="atc_date_end"  ng-bind="SinglePublishCtrl.calendarInfo.atc_date_end"></var>
+                                                    <var class="atc_timezone" id="atc_timezone" ng-bind="SinglePublishCtrl.calendarInfo.atc_timezone"></var>
+                                                    <var class="atc_title" id="atc_title" ng-bind="SinglePublishCtrl.calendarInfo.atc_title"></var>
+                                                    <var class="atc_description" id="atc_description" ng-bind="SinglePublishCtrl.calendarInfo.atc_description"></var>
+                                                    <var class="atc_location" id="atc_location" ng-bind="SinglePublishCtrl.calendarInfo.atc_location"></var>
+                                                    <var class="atc_organizer" id="atc_organizer" ng-bind="SinglePublishCtrl.calendarInfo.atc_organizer"></var>
+                                                    <var class="atc_organizer_email" id="atc_organizer_email" ng-bind="SinglePublishCtrl.calendarInfo.atc_organizer_email"></var>
+                                                </var>
+                                            </span>
+                                                <BR clear="all">
+                                            </div>
+                                            <div class="progress">
+                                                <div id="progressBar" class="progress-bar" ng-class="SinglePublishCtrl.progressColor()" role="progressbar" aria-valuenow="{{SinglePublishCtrl.progressValue()}}" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': SinglePublishCtrl.progressValue()+'%'}">
+                                                    {{SinglePublishCtrl.progressValue()+'%'}}
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <h4 id="statusText" translate="{{SinglePublishCtrl.progressStatus()}}"></h4>
+                                                <p><span id="loadedBytes"></span><span id="totalBytes"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <a href="#/single/{{SinglePublishCtrl.meetingId}}" onclick="" class="pull-left"><button type="button" class="btn btn-primary" translate="BUTTON.BACK"> </button></a>
+                            </div>
+                            <div class="col-xs-8">
+
+                            </div>
+                        </div>
+                        <BR clear="all">
+                        <BR clear="all">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

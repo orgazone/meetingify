@@ -1,0 +1,126 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>2. <span translate="TEXT.PARTICIPANTS"></span></h4>
+                </div>
+                <form id="meetBasics">
+                    <div class="panel-body">
+                        <table class="table table-striped" style="font-size: 1.2em" id="participantsTable">
+                            <tr ng-repeat="participant in MeetingParticipantsCtrl.participants">
+                                <td style="width: 20%;"> {{participant.fullname==" "?participant.user_email:participant.fullname}}
+                                </td>
+                                <td class = "hidden-xs">{{participant.user_email}}
+                                </td>
+                                <td>
+                                    <div class="pull-right">
+                                        <a href="#/send_email">
+                                      <span style="font-size:1.5em;" class="glyphicon glyphicon-envelope">
+                                      </span>
+                                        </a>&nbsp;
+                                        <a href="" data-toggle="modal" data-target="#editmod" ng-click="MeetingParticipantsCtrl.prepareEdit(participant.ID,participant.fullname,participant.user_email);">
+                                            <span style="font-size:1.5em;" class="glyphicon glyphicon-edit"></span>
+                                        </a>&nbsp;
+                                        <a href="" ng-click="MeetingParticipantsCtrl.removeParticipants(participant.ID,participant.userid);">
+                                        <span style="font-size:1.5em;"  class="glyphicon glyphicon-trash">
+                                        </span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <a href="#/meeting_basics" onclick="localStorage['mode'] = 'edit';"  class="pull-left"><button type="button" class="btn btn-primary" translate="BUTTON.BASICS"></button></a>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="text-center">
+                                    <a href="" data-toggle="modal" data-target="#addmod" ng-click="MeetingParticipantsCtrl.newParticipant();" onclick="localStorage['mode'] = 'new';"   class="" >
+                                        <button type="button" class="btn btn-primary ">
+                                        <span class="glyphicon glyphicon-plus-sign" style="color:#fff">
+                                        </span>
+                                        <span class="hidden-xs" style="color:#FFF;" translate="BUTTON.ADD_PEOPLE">
+                                        </span>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="#/meeting_agenda" onclick="" class="pull-right"><button type="button" class="btn btn-primary" translate="BUTTON.AGENDA"></button></a>
+                            </div>
+                        </div>
+                        <BR clear="all">
+                        <BR clear="all">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Participant Modal -->
+<div class="modal fade" id="editmod" tabindex="-1" role="dialog" aria-labelledby="EditParticipant" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="userForm" class="form" id="addMember" role="form"  ng-submit="MeetingParticipantsCtrl.save(userForm);" novalidate>
+                <div class="modal-body">
+                    <div class="well">
+                        <h4 translate="TEXT.ADD_EDIT_PARTICIPANT"></h4>
+                        <div class="form-group text-center" ng-class="{ 'has-error': userForm.name.$invalid }">
+                            <input type="text" class="form-control input-lg" name="name" id="user_name" placeholder="Enter Name" required ng-model="MeetingParticipantsCtrl.editName;"/>
+                        </div>
+                        <BR clear="all">
+                        <BR clear="all">
+                        <div class="form-group text-center" ng-class="{ 'has-error': userForm.email.$invalid }">
+                            <input type="email" class="form-control input-lg" name="email" id="user_email" placeholder="Enter Email" required ng-model="MeetingParticipantsCtrl.editEmail;"/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" translate="BUTTON.CLOSE"></button>
+                    <div class="form-group">
+                        <button type="submit"  class="btn btn-primary" translate="BUTTON.SAVE"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--  Edit Participant Modal -->
+<!-- add new Participant Modal -->
+<div class="modal fade" id="addmod" tabindex="-1" role="dialog" aria-labelledby="AddParticipant" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="addNewForm" class="form" id="addNewForm" role="form" ng-submit="MeetingParticipantsCtrl.save(addNewForm);" novalidate >
+                <div class="modal-body">
+                    <div class="well">
+                        <h4 translate="TEXT.ADD_PARTICIPANTS"></h4>
+                        <div class="form-group text-center" ng-class="{ 'has-error': addNewForm.nameAndEmail.$invalid }">
+                            <tags-input ng-model="MeetingParticipantsCtrl.nameAndEmail" class="bootstrap"
+                                        name="tags"
+                                        placeholder="{{'TEXT.NAME_EMAIL'|translate}}"
+                                        add-on-paste = "true"
+                                        paste-split-pattern = "(,|;|\r|\n|\t|\f)"
+                                        replace-spaces-with-dashes = "false"
+                                        allowed-tags-pattern = '(?:"?([^"]*)"?\s)?(?:<?(.+@[^>]+)>?)'
+                                        enable-editing-last-tag = "true"
+                                        allow-leftover-text="true"
+                            </tags-input>
+                        </div>
+                        <BR clear="all">
+                        <h4><small translate="MESSAGE.ADD_PARTICIPANTS"></small></h4>
+                        <BR clear="all">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" translate="BUTTON.CLOSE"></button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" translate="BUTTON.SAVE"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--  Add new Participant Modal -->

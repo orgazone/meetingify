@@ -1,0 +1,96 @@
+<div class="container" style="padding-top: 50px;" ng-controller="ProtocolPrintController as protocolCtrl">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="text-center" style="font-weight: bold;" translate="TEXT.MEETING_PROTOCOL">
+                    </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="text-center" style="font-weight: bold;"><span ng-bind="protocolCtrl.meeting.topic"></span>
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="text-center">
+                        <h4 ><translate>TEXT.LOCATION_ALT</translate><span>{{protocolCtrl.meeting.location}}</span></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h5 class="text-center">{{protocolCtrl.meeting.start_date}}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <span ng-repeat="member in protocolCtrl.members">
+                        <span >{{member.fullname==" "?member.user_email:member.fullname}}
+                        <span ng-if="$index<protocolCtrl.members.length-1">|</span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="pull-left" style="border-bottom-width:0px"><strong><translate>TEXT.NOTES</translate>:</strong></h4>
+                    <table class="table table-striped" style="font-size: 1.2em">
+                        <tr ng-repeat="note in protocolCtrl.notes" ng-if="note.is_public">
+                            <td style="width: 75%; ">
+                                {{note.note}}
+                                <BR>
+                                <sub ng-bind="note.user_email">
+                                </sub>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="pull-left" style="border-bottom-width:0px"><strong><translate>TEXT.TODOS</translate>:</strong></h4>
+                    <div class="panel-body">
+                        <table class="table table-striped" style="font-size: 1.2em" >
+                            <tbody ng-repeat="mTodos in protocolCtrl.todos" ng-if="mTodos.todos.length>0">
+                            <tr ng-repeat="todo in mTodos.todos">
+                                <td  style="width: 75%;">
+                                    <span>
+                                        <span class="glyphicon glyphicon-unchecked" ng-show="todo.status == 'open'"></span>
+                                        <span class="glyphicon glyphicon glyphicon-check" ng-show="todo.status == 'completed'"></span>
+                                    </span><span ng-class="todo.status == 'completed'?'todoComplete':''">{{todo.todos}}</span>
+                                </td>
+                                <td>
+                                    {{todo.deadline}}
+                                </td>
+                                <td>
+                                    {{mTodos.member.fullname==" "?mTodos.member.user_email:mTodos.member.fullname}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="pull-left" style="border-bottom-width:0px"><strong><translate>TEXT.FILES</translate>:</strong></h4>
+                    <table class="table table-striped" style="font-size: 1.2em">
+                        <tr ng-repeat="file in protocolCtrl.files">
+                            <td style="width: 30%; min-width: 250px;">{{file.filename}}
+                            </td>
+                            <td >uploaded by <span ng-bind="protocolCtrl.getOwnerName(file.user_id)"></span>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

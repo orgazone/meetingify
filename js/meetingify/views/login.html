@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-sm-12 col-md-offset-2" style="padding-top: 35px;">
+            <div class="panel panel-default  text-center">
+                <div class="panel-heading">
+                    <img src="img/biglogo1.png" class="img-responsive" style="margin: 0 auto 0 auto;">
+                    <BR clear="all">
+                    <h4 style="font-size: 1.2em;" translate="LOGIN.TAGLINE"></h4>
+                    <small translate="LOGIN.DESCRIPTION"></small>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <BR clear="all">
+                        <a data-toggle="modal" data-target="#loginmod" class="btn btn-lg btn-success" id="login" translate="LOGIN.BUTTON"></a>
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        <!---<a href="" data-toggle="modal" data-target="#logincode">Join with code</a>-->
+                        <a href="https://apps.orga.zone/apiv2/gui-register.php?appname=meetingify&lang=en" data-toggle="modal" style="font-weight: bold; font-size: 1.2em;" translate="LOGIN.REGISTER"></a>
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        <translate>LOGIN.LANG_MESSAGE</translate>
+                        <BR clear="all">
+                        <div ng-translate></div>
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        &copy; 2015 <translate>LOGIN.COPYRIGHT_BY</translate> <a href="http://www.meetingify.com/" target="_blank">Meetingify.com</a> -
+                        <translate>LOGIN.COPYRIGHT_JOIN</translate> <a href="http://www.meetingify.com/affiliates.php" target="_blank" translate="LOGIN.LINK_AFFILIATE"></a>.<BR>
+                        <BR clear="all">
+                        <BR clear="all">
+                        <BR clear="all">
+                        <translate>LOGIN.HOSTING</translate> <a href="https://orga.zone/en/" target="_blank">orga.zone</a>
+                        <BR>
+                        <translate>LOGIN.RIGHTS_RESERVED</translate>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/row-->
+        <div class="clearfix"></div>
+    </div><!--/main-->
+</div>
+<!-- modals -->
+<!-- Code Modal -->
+<div class="modal fade" id="logincode" tabindex="-1" role="dialog" aria-labelledby="MyLogin" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="well">
+                    <form class="form">
+                        <h4>Enter your code</h4>
+                        <div class="input-group text-center">
+                            <input type="text" class="form-control input-lg" placeholder="Enter your code">
+                            <span class="input-group-btn"><button class="btn btn-lg btn-primary" type="button">OK</button></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login Modal -->
+<div class="modal fade" id="loginmod" tabindex="-1" role="dialog" aria-labelledby="MyLogin" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form" id="loginForm" name="logInForm" ng-submit="LogIn.logIn(logInForm)" novalidate>
+                <div class="modal-body">
+                    <div class="well">
+                        <h4 translate="LOGIN.MODAL_TITLE"></h4>
+                        <div class="form-group" ng-class="{ 'has-error': logInForm.email.$invalid }">
+                            <input type="text"  name="email" class="form-control input-lg" placeholder="{{'LOGIN.MODAL_EMAIL'|translate}}" required ng-model="LogIn.email">
+                        </div>
+                        <BR clear="all">
+                        <BR clear="all">
+                        <div class="form-group" ng-class="{ 'has-error': logInForm.pass.$invalid }">
+                            <input type="password" name="pass" class="form-control input-lg" placeholder="{{'LOGIN.MODAL_PASSWORD'|translate}}" required ng-model="LogIn.pass">
+                        </div>
+                        <BR clear="all">
+                        <a href="https://apps.orga.zone/apiv2/gui-pw.php?appname=meetingify&lang=en" translate="LOGIN.MODAL_PASSWORD_FORGOTTEN"> </a>
+
+                    </div>
+                    <translate>LOGIN.MODAL_NOLOGIN</translate> <a href="https://apps.orga.zone/apiv2/gui-register.php?appname=meetingify&lang=en" translate="LOGIN.REGISTER"></a>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" translate="BUTTON.CLOSE"></button>
+                        <button name="formSubmit" type="submit"  class="btn btn-primary" translate="BUTTON.SAVE" ng-disabled ="logInForm.$invalid"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

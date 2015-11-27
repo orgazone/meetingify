@@ -1,0 +1,63 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="http://www.meetingify.com/effective-meetings.php" target="_blank" class="pull-right" translate="LINK.HELP"></a>
+                    <h4 translate="TEXT.MY_SETTINGS"></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="well">
+                            <form class="form" name="settingsForm" id="settingsform" role="form" ng-submit="SettingsCtrl.saveSettings(settingsForm);" novalidate>
+                                <h4 translate="TEXT.EDIT_SETTINGS"></h4>
+                                <div class="form-group text-center">
+                                    <div class="form-group" ng-class="{ 'has-error': settingsForm.firstname.$invalid }">
+                                        <input type="text" id="user_firstname" name="firstname" class="form-control input-lg" placeholder="First Name" required ng-model="SettingsCtrl.settings.user_firstname">
+                                    </div>
+
+                                    <div class="form-group" ng-class="{ 'has-error': settingsForm.lastname.$invalid }">
+                                        <input type="text" id="user_lastname" name="lastname" class="form-control input-lg" placeholder="Last Name" required ng-model="SettingsCtrl.settings.user_lastname">
+                                    </div>
+
+                                    <div>
+                                        <select class="js-language-single form-control input-lg" id="language" ng-model="SettingsCtrl.settings.locale" ng-init="SettingsCtrl.settings.locale">
+                                            <option value="en" translate="TEXT.ENGLISH"></option>
+                                            <option value="de" translate="TEXT.GERMAN"></option>
+                                            <option value="es" translate="TEXT.SPANISH"></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <p id="user_email" class="form-control-static pull-left" >{{SettingsCtrl.settings.user_email}}<span> - <a href="https://orga.zone/" translate="LINK.CHANGE_EMAIL"> </a></span></p>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+
+                                    <BR clear="all">
+                                    <BR clear="all">
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-offset-0 col-sm-3 col-sm-offset-0 col-xs-10 col-xs-offset-1 ">
+                                                <button ng-click="SettingsCtrl.go('/main')" type="button" class="btn btn-block btn-danger input-lg" style="margin-top:3px;" translate="BUTTON.CANCEL"></button>
+                                            </div>
+                                            <div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1  col-xs-10 col-xs-offset-1 ">
+                                                <button ng-click="SettingsCtrl.clearLocalStorage();" class="btn btn-block btn-primary input-lg" style="margin-top:3px;" translate="BUTTON.CLEAR_AND_LOGOUT"></button>
+                                            </div>
+                                            <div class="col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1  col-xs-10 col-xs-offset-1 ">
+                                                <button ng-disabled="SettingsCtrl.disable" type="submit" class="btn btn-block btn-success input-lg" style="margin-top:3px;" translate="BUTTON.SAVE_SETTINGS"></button><img src="img/loading.GIF" width="40" id="loading" style="float:right; display:none; margin-right:20px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <BR clear="all">
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

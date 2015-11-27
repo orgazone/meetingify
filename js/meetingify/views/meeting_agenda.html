@@ -1,0 +1,97 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>3. <span translate="TEXT.AGENDA"></span></h4>
+                </div>
+                    <div class="panel-body">
+                        <table class="table table-striped" style="font-size: 1.2em" id="agendaTable">
+                            <tr ng-repeat="agenda in MeetingAgendaCtrl.agendas">
+                                <td>
+                                    <div ng-if="agenda.start_time!=MeetingAgendaCtrl.agendas[$index-1].start_time">
+                                        {{agenda.start_time|date:'shortTime'}} - {{agenda.end_time|date:'shortTime'}}
+                                    </div>
+                                </td>
+                                <td>{{agenda.agenda}}
+                                </td>
+                                <td class="hidden-xs"> {{MeetingAgendaCtrl.getOwnerName(agenda.owner_id)}}
+                                </td>
+                                <td>
+                                    <div class="pull-right">
+                                        <a href="" data-toggle="modal" data-target="#editagenda"
+                                           ng-click="MeetingAgendaCtrl.prepareEdit(agenda)">
+                                          <span style="font-size:1.5em;" class="glyphicon glyphicon-edit"></span>
+                                        </a>&nbsp;
+                                        <a href="" ng-click="MeetingAgendaCtrl.removeAgenda(agenda.ID,agenda.agendasub_id);">
+                                          <span style="font-size:1.5em;"   class="glyphicon glyphicon-trash">
+                                          </span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <a href="#/meeting_participants"  onclick=""  class="pull-left"><button type="button" class="btn btn-primary" translate="BUTTON.PARTICIPANTS_BACK"></button></a>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="text-center">
+                                    <a href="" data-toggle="modal" data-target="#editagenda" ng-click="MeetingAgendaCtrl.newAgenda();" onclick="localStorage['mode'] = 'new';" class="" >
+                                        <button type="button" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-plus-sign" style="color:#fff">
+                                            </span>
+                                            <span translate="BUTTON.ADD_AGENDA" class="hidden-xs" style="color:#FFF;">
+                                            </span>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="#/meeting_files" onclick="" class="pull-right"><button type="button" class="btn btn-primary" translate="BUTTON.FILES"></button></a>
+                            </div>
+                        </div>
+                        <BR clear="all">
+                        <BR clear="all">
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Agenda Modal -->
+<div class="modal fade" id="editagenda" tabindex="-1" role="dialog" aria-labelledby="EditAgenda" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form" name="agendaForm" id="addAgenda" role="form" novalidate ng-submit="MeetingAgendaCtrl.saveAgenda(agendaForm)">
+                <div class="modal-body">
+                    <div class="well">
+                        <h4 translate="TEXT.ADD_EDIT_AGENDA"></h4>
+                        <div class="form-group">
+                            <div class="input-group date " id="startTimeAgenda">
+                                <timepicker data-ng-model="MeetingAgendaCtrl.agendaFrom"  minute-step="15" ng-change="MeetingAgendaCtrl.changeDate()"></timepicker>
+                            </div>
+                            <div class="input-group date " id="endTimeAgenda">
+                                <timepicker data-ng-model="MeetingAgendaCtrl.agendaTo"  minute-step="15" min="MeetingAgendaCtrl.agendaFrom"></timepicker>
+                            </div>
+                        <div class="form-group">
+                            <select class="form-control" ng-options="member.userid as (MeetingAgendaCtrl.getOwnerName(member.userid)) for member in MeetingAgendaCtrl.members" ng-model="MeetingAgendaCtrl.agendaOwner">
+                                <option value=""> </option>
+                            </select>
+                        </div>
+                        <div class="form-group text-center" ng-class="{ 'has-error': agendaForm.agendaText.$invalid }">
+                            <textarea class="form-control input-lg" rows="5" name="agendaText" placeholder="{{'TEXT.ENTER_AGENDA'|translate}}" id="agenda_content" required ng-model="MeetingAgendaCtrl.agendaContent" ></textarea>
+                        </div>
+                        <h4><small translate="MESSAGE.ADD_AGENDA"></small></h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" translate="BUTTON.CLOSE"></button>
+                        <button type="submit"  class="btn btn-primary" translate="BUTTON.SAVE"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--  Edit Agenda Modal -->

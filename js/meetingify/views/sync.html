@@ -1,0 +1,25 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="http://www.meetingify.com/effective-meetings.php" target="_blank" class="pull-right">Help</a>
+                    <h4 translate="TEXT.SYNCING"></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="well">
+                            <div>
+                                <span id="loadingText" translate="{{SyncCtrl.loadingText()}}" translate-values="{id:'{{SyncCtrl.loadingMeeting()}}'}"></span>
+                                <div id="loading" ng-show="!SyncCtrl.allDone" class="three-quarters-loader pull-right"></div>
+                                <span ng-show="SyncCtrl.allDone" style="font-size:1.5em;color:green;" class="glyphicon glyphicon-ok pull-right"></span>
+                            </div>
+                            <BR clear="all">
+                        </div>
+                    </div>
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

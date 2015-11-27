@@ -1,0 +1,50 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="navbar-form pull-right" style="margin: 0px; padding: 0px;">
+                        <div class="input-group" style="max-width: 250px;">
+                            <input type="text" class="form-control" placeholder="{{'TEXT.FILTER'|translate}}" name="srch-term" id="srch-term" ng-model="MeetingsCtrl.search">
+                        </div>
+                    </form>
+                    <h4 translate="TEXT.MEETING_LIST"></h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped" id="meetingsTable">
+                        <tr>
+                            <th>
+                                <a href="" ng-click="MeetingsCtrl.orderByField='start_date'; MeetingsCtrl.reverseSort = !MeetingsCtrl.reverseSort" translate="TEXT.DATE_TIME"></a>
+                            </th>
+                            <th>
+                                <a href="" ng-click="MeetingsCtrl.orderByField='topic'; MeetingsCtrl.reverseSort = !MeetingsCtrl.reverseSort" translate="TEXT.TOPIC"></a>
+                            </th>
+                            <th class="hidden-xs">
+                                <a href="" ng-click="MeetingsCtrl.orderByField='members_count'; MeetingsCtrl.reverseSort = !MeetingsCtrl.reverseSort" translate="TEXT.PARTICIPANTS"></a>
+                            </th>
+                            <th>
+                                <a href="" ng-click="MeetingsCtrl.orderByField='status'; MeetingsCtrl.reverseSort = !MeetingsCtrl.reverseSort" translate="TEXT.STATUS"></a>
+                            </th>
+                        </tr>
+                        <tr ng-repeat="meeting in MeetingsCtrl.meetings | filter:MeetingsCtrl.search|orderBy:MeetingsCtrl.orderByField:MeetingsCtrl.reverseSort" ng-click="MeetingsCtrl.singleMeeting(meeting.meetingid)" style="cursor:pointer">
+                            <td width="20%"> {{meeting.start_date}}
+                            </td>
+                            <td>{{meeting.topic}}
+                            </td>
+                            <td class="hidden-xs"> {{meeting.members_count}}
+                            </td>
+                            <td>
+                                <span ng-show="meeting.status=='edited'" class="label label-info" translate="LABEL.EDITED"></span>
+                                <span ng-show="meeting.status=='pending'" class="label label-warning" translate="LABEL.DRAFT"></span>
+                                <span ng-show="meeting.status=='published'" class="label label-success" translate="LABEL.PUBLISHED"></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <a href="#/meeting_basics" onclick="localStorage['singleID']=0;localStorage['flag'] ='new_meeting';localStorage['mode']='new'; prepareNewMeeting();" class="btn btn-primary"><i class="glyphicon glyphicon-time" style="color: #ffffff;" ></i> <translate>BUTTON.CREATE_NEW_MEETING</translate></a>
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

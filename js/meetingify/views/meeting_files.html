@@ -1,0 +1,72 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>4. <span translate="TEXT.FILES"></span></h4>
+                </div>
+                <form id="meetBasics">
+                    <div class="panel-body">
+                        <table class="table table-striped" style="font-size: 1.2em"  id="filesTable">
+                            <tr ng-repeat="file in MeetingFilesCtrl.files">
+                                <td style="width: 30%;"><a href="" ng-click="MeetingFilesCtrl.downloadFile(file);">{{file.filename}}</a>
+                                </td>
+                                <td class = "hidden-xs"><span translate="TEXT.UPLOADED_BY"></span> <span ng-bind="MeetingFilesCtrl.getFullName(file.user_id, SingleFilesCtrl.localDB)"></span>
+                                </td>
+                                <td>
+                                    <div class="pull-right">
+                                        <a href="" ng-click="MeetingFilesCtrl.removeFile(file.ID,file.filessub_id);" >
+                                        <span style="font-size:1.5em;" class="glyphicon glyphicon-trash">
+
+                                        </span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <a href="#/meeting_agenda"  onclick="" class="pull-left"><button type="button" class="btn btn-primary" translate="BUTTON.AGENDA_BACK"></button></a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="" data-toggle="modal" data-target="#uploadfile"  onclick="localStorage['mode'] = 'new';"   class="center-block" ><button type="button" class="btn btn-primary center-block"><span class="glyphicon glyphicon-plus-sign" style="color:#fff"></span><span class="hidden-xs" style="color:#FFF;" translate="BUTTON.ADD_FILE"> </span></button></a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="#/meeting_publish" id="publishLink" onclick="" class="pull-right"><button  type="button" id="publishButton" class="btn btn-primary" translate="BUTTON.PUBLISH_FORWARD"></button></a>
+                            </div>
+                        </div>
+                        <BR clear="all">
+                        <BR clear="all">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Upload File -->
+<div class="modal fade" id="uploadfile" tabindex="-1" role="dialog" aria-labelledby="EditAgenda" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="form"  id="addFile" role="form" name="myForm" data-toggle="validator" ng-submit="MeetingFilesCtrl.uploadFile();">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="well">
+                        <h4 translate="TEXT.UPLOAD_A_FILE"></h4>
+                        <div class="form-group text-center">
+                            <input type="file" class="filestyle" id="fileselect" name="file" data-buttonBefore="true" required />
+                            <br />
+                            <img src="img/ajax_pending.gif" width="40" id="upload_pending" style="display:none" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" translate="BUTTON.CLOSE"></button>
+                    <div class="form-group">
+                        <button type="submit"  class="btn btn-primary" translate="BUTTON.UPLOAD_NOW"></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--  Upload File -->

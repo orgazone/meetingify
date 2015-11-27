@@ -1,0 +1,55 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 translate="TEXT.ALL_OPEN_TODOS"></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="bs-example">
+                        <div class="panel-group" id="accordion"  ng-model="collapseState">
+                            <div class="panel panel-default" ng-repeat="openTodos in OpenTodosCtrl.openTodos">
+                                <button  style="text-decoration: none;width:100%;" class="btn btn-link" role="link" ng-click="collapseState[$index]= !collapseState[$index]" data-parent="#accordion"">
+                                    <div class="panel-heading">
+                                        <div class="pull-left span2 text-primary">{{openTodos.meeting.topic}}</div><div class="pull-right glyphicon span1 text-primary"  ng-class="collapseState[$index] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></div>
+                                    </div>
+                                </button>
+                                <div collapse="!collapseState[$index]">
+                                    <div class="panel-body">
+                                            <table class="table table-striped" style="font-size: 1.2em">
+                                                <thead></thead>
+                                                <tr ng-repeat="todo in openTodos.todosArray" >
+                                                    <td  style="width: 75%;">
+                                                        <span>
+                                                        <a href="" ng-click="OpenTodosCtrl.markAsDone(todo)">
+                                                            <span class="glyphicon glyphicon-unchecked" ng-show="todo.status == 'open'"></span>
+                                                            <span class="glyphicon glyphicon glyphicon-check" ng-show="todo.status == 'completed'"></span>
+                                                        </a>
+                                                    </span><span ng-class="todo.status == 'completed'?'todoComplete':''">{{todo.todos}}</span>
+                                                    </td>
+                                                    <td>
+                                                        {{todo.deadline}}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        <a href="" class="pull-right" ng-click="OpenTodosCtrl.markAllAsDone(openTodos.todosArray)"><button type="button" class="btn btn-primary" translate="BUTTON.MARK_ALL_AS_DONE"></button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#/" class="pull-left"><button type="button" class="btn btn-primary" translate="BUTTON.BACK"></button></a>
+                        </div>
+
+                        <div class="col-xs-6">
+                        </div>
+                    </div>
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

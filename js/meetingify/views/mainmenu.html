@@ -1,0 +1,35 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="http://www.meetingify.com/effective-meetings.php" target="_blank" class="pull-right" translate="LINK.HELP"></a>
+                    <h4 translate="TEXT.MAIN_MENU"></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="list-group">
+                            <a href="#/meetings" class="list-group-item" style="font-size: 1.4em; color: #000000;">
+                                <i class="glyphicon glyphicon-list-alt"></i> <span translate="BUTTON.MEETING_LIST"></span>
+                                <span class="badge label-warning" ng-bind="MainMenuCtrl.meetings_changed_count" ng-show="MainMenuCtrl.meetings_changed_count > 0">0/</span>
+                                <span class="badge label-primary pull-right" ng-bind="MainMenuCtrl.meetings_count">0</span></a>
+                        </div>
+                        <div class="list-group">
+                            <a href="#/meeting_basics" ng-click="MainMenuCtrl.prepareNewMeeting();"  class="list-group-item" style="font-size: 1.4em; color: #000000;">
+                                <i class="glyphicon glyphicon-time"></i> <span translate="BUTTON.CREATE_MEETING"></span></a>
+                        </div>
+                        <div class="list-group">
+                            <a href="#/open_todos" class="list-group-item" style="font-size: 1.4em; color: #000000;">
+                                <i class="glyphicon glyphicon-sort-by-attributes"></i> <span translate="BUTTON.ALL_OPEN_TODOS"></span></a>
+                        </div>
+                        <div class="list-group">
+                            <a href="#/settings" class="list-group-item" style="font-size: 1.4em; color: #000000;">
+                                <i class="glyphicon glyphicon-cog"></i> <span translate="BUTTON.MY_SETTINGS"></span></a>
+                        </div>
+                    </div>
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

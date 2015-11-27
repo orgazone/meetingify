@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>START</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+			<script src="libs/html5.js"></script>
+		<![endif]-->
+		<link href="css/styles.css" rel="stylesheet">
+        <link href="css/toastr.css" rel="stylesheet">
+	</head>
+	<body>
+        <!--main-->
+        <div class="container">
+           <div class="row">
+               <div class="col-md-8 col-sm-12 col-md-offset-2" style="padding-top: 35px;">
+                   <div class="panel panel-default  text-center">
+                       <div class="panel-heading">
+                           <img src="img/biglogo1.png" class="img-responsive" style="margin: 0 auto 0 auto;">
+                           <BR clear="all">
+                           <h4>Get your meeting organized</h4>
+                       </div>
+                       <div class="panel-body">
+                           <div class="list-group">
+                               <B>Register for free or sign in</B>
+                               <BR clear="all">
+                               <BR clear="all">
+                               <a href="#" data-toggle="modal" data-target="#loginmod" class="btn btn-lg btn-success">Login</a>
+                               <BR clear="all">
+                               <BR clear="all">
+                               <BR clear="all">
+                               <a href="#" data-toggle="modal" data-target="#logincode">Join with code</a>
+                               <BR clear="all">
+                               <BR clear="all">
+                               <BR clear="all">
+                               <a href="#" data-toggle="modal" data-target="#register">Register for free</a>
+                               <BR clear="all">
+                               <BR clear="all">
+                               <BR clear="all">
+                               <BR clear="all">
+                               &copy; 2015 orga.zone
+                               <BR>
+                               All rights reserved.
+                           </div>
+                       </div>
+                   </div>
+               </div>
+            <!--/row-->
+            <div class="clearfix"></div>
+            </div><!--/main-->
+        </div>
+    <!-- modals -->
+        <!-- Code Modal -->
+        <div class="modal fade" id="logincode" tabindex="-1" role="dialog" aria-labelledby="MyLogin" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="well">
+                            <form class="form">
+                                <h4>Enter your code</h4>
+                                <div class="input-group text-center">
+                                    <input type="text" class="form-control input-lg" placeholder="Enter your code">
+                                    <span class="input-group-btn"><button class="btn btn-lg btn-primary" type="button">OK</button></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginmod" tabindex="-1" role="dialog" aria-labelledby="MyLogin" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="well">
+                            <form class="form">
+                                <h4>Login with eMail and password</h4>
+                                    <input type="text" id="user_email" class="form-control input-lg" placeholder="Enter your email address">
+                                    <BR clear="all">
+                                    <BR clear="all">
+                                    <input type="password" id="user_pass" class="form-control input-lg" placeholder="Enter your password">
+                            </form>
+                        </div>
+                        No login? <a href="#" data-toggle="modal" data-target="#register">Register for free</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <a href="#" id="loginSubmit" class="btn btn-primary">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+	<!-- script references -->
+		<script src="libs/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/scripts.js"></script>
+        <script src="libs/localstoragedb.min.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/toastr.js"></script>
+	</body>
+</html>

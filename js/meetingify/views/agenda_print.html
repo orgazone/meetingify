@@ -1,0 +1,56 @@
+<div class="container" style="padding-top: 50px;" ng-controller="AgendaPrintController as agendaCtrl">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="text-center" style="font-weight: bold;" translate="TEXT.MEETING_AGENDA">
+                    </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="text-center" style="font-weight: bold;"><span ng-bind="agendaCtrl.meeting.topic"></span>
+                    </h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="text-center">
+                        <h4><translate>TEXT.LOCATION_ALT</translate><span>{{agendaCtrl.meeting.location}}</span></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h5 class="text-center">{{agendaCtrl.meeting.start_date}}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <span ng-repeat="member in agendaCtrl.members">
+                        <span class="control-label1">{{member.fullname==" "?member.user_email:member.fullname}}
+                        <span ng-if="$index<agendaCtrl.members.length-1">|</span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-striped" style="font-size: 1.2em" >
+                        <tr ng-repeat="agenda in agendaCtrl.agendas">
+                            <td>
+                                <div ng-if="agenda.start_time!=agendaCtrl.agendas[$index-1].start_time">
+                                    {{agenda.start_time|date:'shortTime'}} - {{agenda.end_time|date:'shortTime'}}
+                                </div>
+                            </td>
+                            <td>{{agenda.agenda}}
+                            </td>
+                            <td> {{agendaCtrl.getOwnerName(agenda.owner_id)}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

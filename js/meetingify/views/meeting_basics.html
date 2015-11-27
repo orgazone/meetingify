@@ -1,0 +1,71 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>1. <span translate="TEXT.BASICS"></span></h4>
+                </div>
+                <form name="BasicsForm" class="form" id="meetBasics" role="form" novalidate ng-submit="MeetingBasicsCtrl.save(BasicsForm)">
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <td style="width: 20%; "><span translate="TEXT.TOPIC"></span>:</td>
+                                <td>
+                                    <div class="form-group" ng-class="{ 'has-error': BasicsForm.meetTopic.$invalid }">
+                                        <input type="text" class="form-control" id="meetTopic" name="meetTopic" placeholder="{{'TEXT.TOPIC_OF_MEETING' | translate}}" required ng-model="MeetingBasicsCtrl.meeting.topic"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="TEXT.DATE_AND_TIME"></span>:</td>
+                                <td>
+                                    <div class="form-group" ng-class="{ 'has-error': BasicsForm.dateTime.$invalid }">
+                                        <a href="" class='input-group date' id='datetimepicker1'
+                                           ng-date-time-picker
+                                           picker-type="dateTime"
+                                           ng-model="MeetingBasicsCtrl.meeting.start_date"
+                                           name="dateTime">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="TEXT.LOCATION"></span>:</td>
+                                <td>
+                                    <div class="form-group" ng-class="{ 'has-error': BasicsForm.meetLoc.$invalid }">
+                                        <input type="text" class="form-control" name="meetLoc" id="meetLoc" ng-model="MeetingBasicsCtrl.meeting.location"  ng-init="MeetingBasicsCtrl.setMapOnChange()" ng-change="MeetingBasicsCtrl.setMapOnChange()" required/>
+                                        <div class="form-group">
+                                            <iframe width="100%" height="250" frameborder="0" style="border:0" id="meetMap" ng-src="{{MeetingBasicsCtrl.mapSrc}}"></iframe>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span translate="TEXT.NATURE_OF_MEETING"></span>:</td>
+                                <td>
+                                    <div class="form-group" ng-class="{ 'has-error': BasicsForm.meetKind.$invalid }"></div>
+                                    <select class="form-control" id="meetNature" name="meetKind" ng-model="MeetingBasicsCtrl.meeting.kind" ng-init="MeetingBasicsCtrl.meeting.kind" >
+                                        <option value="Information" translate="TEXT.INFORMATION"></option>
+                                        <option value="Decision" translate="TEXT.DECISION"></option>
+                                        <option value="Mandatory" translate="TEXT.MANDATORY"></option>
+                                        <option value="Sales" translate="TEXT.SALES"></option>
+                                        <option value="Training" translate="TEXT.TRAINING"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: right;">
+                                    <div class="form-group">
+                                        <div id="loading" ng-show="MeetingBasicsCtrl.loading" class="three-quarters-loader pull-right"></div><button type="submit" class="btn btn-primary" translate="BUTTON.PARTICIPANTS"></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <BR clear="all">
+                        <BR clear="all">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

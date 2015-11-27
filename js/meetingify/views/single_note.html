@@ -1,0 +1,84 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><span ng-bind="SingleNoteCtrl.topic"></span></h4>
+                </div>
+
+
+                <h4 style="border-bottom-width:0px;   padding-left: 15px;" translate="TEXT.NOTE_SUMMARY"></h4>
+
+                <div class="panel-body">
+                    <!--Filter notes by email here...--->
+                    <div class="btn-group btn-group-sm pull-right">
+                        <a href="" ng-print print-template="'js/meetingify/views/protocol_print.html'" target="_blank" class="btn btn-default" translate="BUTTON.PRINT_VIEW"></a>
+                    </div>
+                    <table class="table table-striped" style="font-size: 1.2em" id = "notesTable">
+                        <tr ng-repeat="note in SingleNoteCtrl.notes">
+                            <td style="width: 75%; ">
+                            {{note.note}}
+                            <BR>
+                                <sub ng-bind="note.user_email">
+                                </sub>
+                            </td>
+                            <td>
+                                <span ng-show="note.is_public" class="label label-success pull-right" translate="LABEL.PUBLIC"></span>
+                                <span ng-show="!note.is_public" class="label label-primary pull-right" translate="LABEL.PRIVATE"></span>
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    <a href="" data-toggle="modal" data-target="#editnote"  ng-click="SingleNoteCtrl.setEditNote(note.ID,note.note,note.is_public)">
+                                        <span style="font-size:1.5em;" class="glyphicon glyphicon-edit">
+                                        </span> </a>&nbsp;<a href="" ng-click="SingleNoteCtrl.removeNote(note.ID,note.notesub_id);">
+                                    <span style="font-size:1.5em;" class="glyphicon glyphicon-trash">
+                                    </span>
+                                </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#/single/{{SingleNoteCtrl.meetingId}}" class="pull-left"><button type="button" class="btn btn-primary" translate="BUTTON.BACK"> </button></a>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <a href="" data-toggle="modal" data-target="#editnote"  onclick="localStorage['mode'] = 'new';" ng-click="SingleNoteCtrl.newNote();" class="pull-right btn btn-primary"><span class="glyphicon glyphicon-plus-sign" style="color:#fff"></span> <translate>BUTTON.ADD_NOTE</translate></a></div>
+                    </div>
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Note Modal -->
+<div class="modal fade" id="editnote" tabindex="-1" role="dialog" aria-labelledby="EditAgenda" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form" name="noteForm" id="addNote" role="form"  ng-submit="SingleNoteCtrl.saveNote(noteForm);" novalidate>
+                <div class="modal-body">
+                    <div class="well">
+                        <h4 translate="TEXT.ADD_EDIT_NOTE"></h4>
+                        <div class="form-group">
+                            <input type="checkbox" name="notepub" id="notepub" checked ng-model = "SingleNoteCtrl.isPublic">
+                            <label for="notepub" translate="LABEL.PUBLIC"></label>
+                        </div>
+                        <div class="form-group text-center" ng-class="{ 'has-error': noteForm.noteContent.$invalid }">
+                            <textarea class="form-control input-lg" name="noteContent" rows="5" placeholder="{{'TEXT.ENTER_NOTE'|translate}}" id="note_content" required ng-model="SingleNoteCtrl.noteContent"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" translate="BUTTON.CLOSE"></button>
+                        <button type="submit"  class="btn btn-primary" translate="BUTTON.SAVE"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--  Edit note Modal -->

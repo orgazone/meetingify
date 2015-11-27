@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html ng-app="Meetingify" lang="en" manifest="meetingify.appcache">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Meetingify</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+		<!--[if lt IE 9]>
+        <script src="js/meetingify/vendor/html5.js"></script>
+        <![endif]-->
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet">
+        <link href="css/toastr.css" rel="stylesheet">
+        <link href="css/ng-tags-input.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/three-quarters.css" type="text/css">
+
+        <script src="js/meetingify/vendor/jquery-1.11.3.min.js"></script>
+        <script src="js/meetingify/vendor/angular.min.js"></script>
+        <script src="js/meetingify/vendor/angular-animate.min.js"></script>
+        <script src="js/meetingify/vendor/angular-route.min.js"></script>
+        <script src="js/meetingify/vendor/moment.js"></script>
+        <script src="js/meetingify/vendor/bootstrap.min.js"></script>
+        <script src="js/meetingify/vendor/bootstrap-datetimepicker.min.js"></script>
+        <meta property="og:image" content="http://www.meetingify.com/images/slide-02-image-01.png" />
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="img/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="img/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="img/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="img/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="img/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+        <link rel="shortcut icon" href="img/favicon.png">
+        <link rel="stylesheet" type="text/css" href="libs/addtohomescreen.css" />
+
+    </head>
+	<body  ng-controller="MainController as MainCtrl">
+    <!-- TOP MENU -------------------------->
+    <nav class="navbar navbar-default navbar-fixed-top" style="margin-top: 0px;" role="navigation" ng-cloak ng-if="MainCtrl.showHide()">
+        <div class="container">
+            <div class="row">
+            <div class="col-xs-12">
+                <div class="navbar-header">
+                  <a class="navbar-btn btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin: 4px 0px 4px 0px;">
+                      <img src="img/logo-sm.png">
+                      <small><i class="glyphicon glyphicon-chevron-down"></i></small>
+                  </a>
+                  <ul class="nav dropdown-menu" style="margin-left: 14px;">
+                      <li><a href="#/main"><i class="glyphicon glyphicon-home" style="color:#FFC200;"></i> <span translate="BUTTON.HOME"></span></a></li>
+                      <li><a href="#/meetings"><i class="glyphicon glyphicon-list-alt" style="color:#11dd11;"></i> <span translate="BUTTON.MEETING_LIST"></span></a>
+                      <li><a href="#/meeting_basics" ng-click="MainCtrl.prepareNewMeeting();"><i class="glyphicon glyphicon-time" style="color:#1111dd;"></i> <span translate="BUTTON.CREATE_MEETING"></span></a></li>
+                      <li><a href="#/sync"><i class="glyphicon glyphicon-transfer" style="color:black;"></i> <span translate="BUTTON.SYNC"></span></a>
+                      <li class="nav-divider"></li>
+                      <li><a href="#/status"><i class="glyphicon glyphicon-dashboard" style="color:#0000aa;"></i> <span translate="BUTTON.STATUS"></span></a></li>
+                      <li><a href="#/settings"><i class="glyphicon glyphicon-cog" style="color:#dd1111;"></i> <span translate="BUTTON.MY_SETTINGS"></span></a></li>
+                      <li><a href="" ng-click="MainCtrl.logout()"><i class="glyphicon glyphicon-user" style="color:#1111dd;"></i> <span translate="BUTTON.LOG_OUT"></span></a></li>
+                  </ul>
+                  <button type="button" class="navbar-toggle" ng-click="MainCtrl.collapse = !MainCtrl.collapse" style="border: 1px solid #666666; margin-top: 12px;" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar" style="background-color: #666666;"></span>
+                      <span class="icon-bar" style="background-color: #666666;"></span>
+                      <span class="icon-bar" style="background-color: #666666;"></span>
+                  </button>
+                </div>
+                <div class="navbar-collapse" collapse="MainCtrl.collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#/settings"><span ng-bind="MainCtrl.fullName()"></span></a>
+                        </li>
+                        <li>
+                            <div ng-translate></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+    </nav>
+    <!-- /TOP MENU -------------------------->
+    <!-- CONTENT --------------------------------------- -->
+    <div ng-view></div>
+    <!-- / CONTENT --------------------------------------- -->
+    <!-- BOTTOM MENU -------------------------->
+    <div class="clearfix"></div>
+    <div class="clearfix"></div>
+    <div class="clearfix"></div>
+    <div class="navbar navbar-default navbar-fixed-bottom" ng-cloak ng-if="MainCtrl.showHide()">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <a href="#/main" class="btn btn-default" style="margin: 6px 10px 2px 0px;" translate="BUTTON.HOME"></a>
+                        <a href="#/status" class="btn btn-default" style="margin: 6px 10px 2px 0px;" translate="BUTTON.STATUS"></a>
+                        <a href="#/sync" class="btn btn-default" style="margin: 6px 10px 2px 0px;" translate="BUTTON.SYNC"></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / BOTTOM MENU -------------------------->
+	<!-- script references -->
+
+    <script src="js/meetingify/vendor/select2.min.js"></script>
+    <script src="js/meetingify/vendor/scripts.js"></script>
+    <script src="js/meetingify/vendor/validator.min.js"></script>
+    <script src="js/meetingify/vendor/localstoragedb.min.js"></script>
+    <script src="js/meetingify/vendor/toastr.js"></script>
+    <script src="js/meetingify/common.js"></script>
+    <script src="js/meetingify/app.js"></script>
+    <script src="js/meetingify/vendor/bootstrap-filestyle.min.js"></script>
+    <script src="js/meetingify/vendor/FileSaver.min.js"></script>
+    <script src="js/meetingify/vendor/ics.min.js"></script>
+    <script src="js/meetingify/vendor/ng-tags-input.min.js"></script>
+    <script src="js/meetingify/vendor/ui-bootstrap-tpls-0.13.4.min.js"></script>
+    <script src="js/meetingify/vendor/angular-translate.min.js"></script>
+    <script src="js/meetingify/vendor/angular-translate-loader-static-files.min.js"></script>
+
+
+    <!--directives-->
+    <script src="js/meetingify/directives/ngPrint.js"></script>
+    <script src="js/meetingify/directives/ngDateTimePicker.js"></script>
+    <script src="js/meetingify/directives/ngSubscriptionHtml.js"></script>
+    <script src="js/meetingify/directives/ngTranslate.js"></script>
+    <!--services-->
+    <script src="js/meetingify/services/ApiCallService.js"></script>
+    <script src="js/meetingify/services/CommonFunctions.js"></script>
+    <script src="js/meetingify/services/GlobalVariablesService.js"></script>
+    <script src="js/meetingify/services/AuthenticationService.js"></script>
+
+    <!-- Object factories-->
+    <script src="js/meetingify/factories/MeetingObjectFactory.js"></script>
+    <script src="js/meetingify/factories/MemberObjectFactory.js"></script>
+    <script src="js/meetingify/factories/AgendaObjectFactory.js"></script>
+    <script src="js/meetingify/factories/TodoObjectFactory.js"></script>
+    <script src="js/meetingify/factories/FileObjectFactory.js"></script>
+    <script src="js/meetingify/factories/NoteObjectFactory.js"></script>
+
+    <!--factories-->
+    <script src="js/meetingify/factories/AuthorizationInterceptor.js"></script>
+    <script src="js/meetingify/factories/OnBreakFactory.js"></script>
+    <script src="js/meetingify/factories/LogInFactory.js"></script>
+    <script src="js/meetingify/factories/MeetingsFactory.js"></script>
+    <script src="js/meetingify/factories/MeetingBasicsFactory.js"></script>
+    <script src="js/meetingify/factories/MeetingParticipantsFactory.js"></script>
+    <script src="js/meetingify/factories/MeetingAgendaFactory.js"></script>
+    <script src="js/meetingify/factories/MeetingFilesFactory.js"></script>
+    <script src="js/meetingify/factories/MeetingPublishFactory.js"></script>
+    <script src="js/meetingify/factories/SettingsFactory.js"></script>
+    <script src="js/meetingify/factories/SyncFactory.js"></script>
+    <script src="js/meetingify/factories/SingleFactory.js"></script>
+    <script src="js/meetingify/factories/SingleBasicsFactory.js"></script>
+    <script src="js/meetingify/factories/SingleAgendaFactory.js"></script>
+    <script src="js/meetingify/factories/SingleParticipantsFactory.js"></script>
+    <script src="js/meetingify/factories/SendEmailFactory.js"></script>
+    <script src="js/meetingify/factories/SingleFilesFactory.js"></script>
+    <script src="js/meetingify/factories/SingleNoteFactory.js"></script>
+    <script src="js/meetingify/factories/SingleTodoFactory.js"></script>
+    <script src="js/meetingify/factories/SubscriptionModalFactory.js"></script>
+    <script src="js/meetingify/factories/OpenTodosFactory.js"></script>
+
+    <!--Controllers-->
+    <script src="js/meetingify/controllers/LogInController.js"></script>
+    <script src="js/meetingify/controllers/MainController.js"></script>
+    <script src="js/meetingify/controllers/MainMenuController.js"></script>
+    <script src="js/meetingify/controllers/ModalInstanceController.js"></script>
+    <script src="js/meetingify/controllers/MeetingsController.js"></script>
+    <script src="js/meetingify/controllers/MeetingBasicsController.js"></script>
+    <script src="js/meetingify/controllers/MeetingParticipantsController.js"></script>
+    <script src="js/meetingify/controllers/MeetingAgendaController.js"></script>
+    <script src="js/meetingify/controllers/MeetingFilesController.js"></script>
+    <script src="js/meetingify/controllers/MeetingPublishController.js"></script>
+    <script src="js/meetingify/controllers/SettingsController.js"></script>
+    <script src="js/meetingify/controllers/StatusController.js"></script>
+    <script src="js/meetingify/controllers/SyncController.js"></script>
+    <script src="js/meetingify/controllers/SingleController.js"></script>
+    <script src="js/meetingify/controllers/SingleBasicsController.js"></script>
+    <script src="js/meetingify/controllers/SingleAgendaController.js"></script>
+    <script src="js/meetingify/controllers/SingleParticipantsController.js"></script>
+    <script src="js/meetingify/controllers/SendEmailController.js"></script>
+    <script src="js/meetingify/controllers/SingleFilesController.js"></script>
+    <script src="js/meetingify/controllers/SingleNoteController.js"></script>
+    <script src="js/meetingify/controllers/SingleTodoController.js"></script>
+    <script src="js/meetingify/controllers/SinglePublishController.js"></script>
+    <script src="js/meetingify/controllers/SubscriptionModalController.js"></script>
+    <script src="js/meetingify/controllers/OpenTodosController.js"></script>
+    <script src="js/meetingify/controllers/AgendaPrintController.js"></script>
+    <script src="js/meetingify/controllers/ProtocolPrintController.js"></script>
+    <script type="text/javascript" src="libs/addtohomescreen.js"></script>
+    <script>
+        $( document ).ready(function() {
+            var addtohome = addToHomescreen({
+                detectHomescreen: true,
+                debug: false, // override browser checks
+                displayPace: 0 // minutes before the message is shown again (0: display every time, default 24 hours)
+            });
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-60504965-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+	</body>
+</html>

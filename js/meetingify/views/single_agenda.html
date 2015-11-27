@@ -1,0 +1,90 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><span ng-bind="SingleAgendaCtrl.topic"></span></h4>
+                </div>
+                <h4 style="border-bottom-width:0px;   padding-left: 15px;" translate="TEXT.AGENDA"></h4>
+                <div class="panel-body">
+                    <div class="btn-group btn-group-sm pull-right">
+                        <a href="" ng-print print-template="'js/meetingify/views/agenda_print.html'" target="_blank" class="btn btn-default" translate="BUTTON.PRINT_VIEW"></a>
+                    </div>
+                    <table class="table table-striped" style="font-size: 1.2em"  id="agendaTable">
+                        <tr ng-repeat="agenda in SingleAgendaCtrl.agendas">
+                            <td>
+                                <div ng-if="agenda.start_time!=SingleAgendaCtrl.agendas[$index-1].start_time">
+                                    {{agenda.start_time|date:'shortTime'}} - {{agenda.end_time|date:'shortTime'}}
+                                </div>
+                            </td>
+                            <td>{{agenda.agenda}}
+                            </td>
+                            <td class="hidden-xs"> {{SingleAgendaCtrl.getOwnerName(agenda.owner_id)}}
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    <a href="" data-toggle="modal" data-target="#editagenda" ng-click="SingleAgendaCtrl.prepareEdit(agenda)">
+                                    <span style="font-size:1.5em;" class="glyphicon glyphicon-edit">
+                                    </span>
+                                    </a>&nbsp;
+                                    <a href="" ng-click="SingleAgendaCtrl.removeAgenda(agenda.ID,agenda.agendasub_id);">
+                                        <span style="font-size:1.5em;"   class="glyphicon glyphicon-trash">
+                                        </span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a ng-href="#/single/{{SingleAgendaCtrl.meetingId}}" class="pull-left"><button type="button" class="btn btn-primary" translate="BUTTON.BACK"> </button></a>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <a href="" data-toggle="modal" data-target="#editagenda" ng-click="SingleAgendaCtrl.newAgenda();" onclick="localStorage['mode'] = 'new';"   class="pull-right btn btn-primary"><span class="glyphicon glyphicon-plus-sign" style="color:#fff"></span> <translate>BUTTON.ADD_AGENDA</translate></a></div>
+                    </div>
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+            </div>
+        </div>
+        <!-- Edit Participant Modal -->
+        <div class="modal fade" id="editagenda" tabindex="-1" role="dialog" aria-labelledby="EditAgenda" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form class="form" id="addAgenda" name="agendaForm" role="form" novalidate ng-submit="SingleAgendaCtrl.saveAgenda(agendaForm)">
+                        <div class="modal-body">
+                            <div class="well">
+                                <h4 translate="TEXT.ADD_EDIT_AGENDA"></h4>
+                                <div class="form-group">
+                                    <div class="input-group date" id="startTimeAgenda">
+                                        <timepicker data-ng-model="SingleAgendaCtrl.agendaFrom"  minute-step="15" ng-change="SingleAgendaCtrl.changeDate()"></timepicker>
+                                    </div>
+                                    <div class="input-group date" id="endTimeAgenda">
+                                        <timepicker data-ng-model="SingleAgendaCtrl.agendaTo"  minute-step="15" min="SingleAgendaCtrl.agendaFrom"></timepicker>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" ng-options="member.userid as (SingleAgendaCtrl.getOwnerName(member.userid)) for member in SingleAgendaCtrl.members" ng-model="SingleAgendaCtrl.agendaOwner">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                                <div class="form-group text-center" ng-class="{ 'has-error': userForm.agendaText.$invalid }">
+                                    <textarea class="form-control input-lg" name="agendaText" rows="5" placeholder="{{'TEXT.ENTER_AGENDA'|translate}}" id="agenda_content" required ng-model="SingleAgendaCtrl.agendaContent;"></textarea>
+                                </div>
+                                <h4><small translate="MESSAGE.ADD_AGENDA"></small></h4>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal" translate="BUTTON.CLOSE"></button>
+                                <button name="formSubmit" type="submit"  class="btn btn-primary" translate="BUTTON.SAVE"></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--  Edit Participant Modal -->
+    </div>
+</div>

@@ -1,0 +1,117 @@
+<div class="container" style="padding-top: 66px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><span ng-bind="SingleParticipantsCtrl.topic"></span></h4>
+                </div>
+                <h4 style="border-bottom-width:0px;   padding-left: 15px;" translate="TEXT.PARTICIPANTS"></h4>
+                <div class="panel-body">
+                    <div class="btn-group btn-group-sm pull-right">
+                        <a href="" ng-print print-template="'js/meetingify/views/agenda_print.html'" target="_blank" class="btn btn-default" translate="BUTTON.PRINT_VIEW"></a>
+                    </div>
+                    <table class="table table-striped" style="font-size: 1.2em" id="participantsTable">
+                        <tr ng-repeat="participant in SingleParticipantsCtrl.participants">
+                            <td style="width: 20%;"> {{participant.fullname==" "?participant.user_email:participant.fullname}}
+                            </td>
+                            <td class = "hidden-xs">{{participant.user_email}}
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    <a href="#/send_email">
+                                      <span style="font-size:1.5em;" class="glyphicon glyphicon-envelope">
+                                      </span>
+                                    </a>&nbsp;
+                                    <a href="" data-toggle="modal" data-target="#editmod" ng-click="SingleParticipantsCtrl.prepareEdit(participant.ID,participant.fullname,participant.user_email)">
+                                        <span style="font-size:1.5em;" class="glyphicon glyphicon-edit"></span>
+                                    </a>&nbsp;
+                                    <a href="" ng-click="SingleParticipantsCtrl.removeParticipants(participant.ID,participant.userid)">
+                                        <span style="font-size:1.5em;"  class="glyphicon glyphicon-trash">
+                                        </span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#/single/{{SingleParticipantsCtrl.meetingId}}" class="pull-left"><button type="button" class="btn btn-primary" translate="BUTTON.BACK"> </button></a>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <a href="" data-toggle="modal" data-target="#addmod" onclick="localStorage['mode'] = 'new';" ng-click="SingleParticipantsCtrl.newParticipant();" class="pull-right btn btn-primary"><span class="glyphicon glyphicon-plus-sign" style="color:#fff"></span> <translate>BUTTON.ADD_PARTICIPANTS</translate></a></div>
+                    </div>
+                    <BR clear="all">
+                    <BR clear="all">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Participant Modal -->
+<div class="modal fade" id="editmod" tabindex="-1" role="dialog" aria-labelledby="EditParticipant" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="userForm" class="form" id="addMember" role="form" ng-submit="SingleParticipantsCtrl.save(userForm);" novalidate >
+                <div class="modal-body">
+                    <div class="well">
+                        <h4 translate="TEXT.ADD_EDIT_PARTICIPANT"></h4>
+                        <div class="form-group text-center" ng-class="{ 'has-error': userForm.name.$invalid }">
+                            <input type="text" class="form-control input-lg" name="name" id="user_name" placeholder="Enter Name" required ng-model="SingleParticipantsCtrl.editName"/>
+                        </div>
+                        <BR clear="all">
+                        <BR clear="all">
+                        <div class="form-group text-center" ng-class="{ 'has-error': userForm.email.$invalid }">
+                            <input type="email" class="form-control input-lg" name="email" id="user_email" placeholder="Enter Email" required ng-model="SingleParticipantsCtrl.editEmail"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" translate="BUTTON.CLOSE"></button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" translate="BUTTON.SAVE"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--  Edit Participant Modal -->
+<!-- add new Participant Modal -->
+<div class="modal fade" id="addmod" tabindex="-1" role="dialog" aria-labelledby="AddParticipant" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="addNewForm" class="form" id="addNewForm" role="form" ng-submit="SingleParticipantsCtrl.save(addNewForm);" novalidate >
+                <div class="modal-body">
+                    <div class="well">
+                        <h4 translate="TEXT.ADD_PARTICIPANTS"></h4>
+                        <div class="form-group text-center" ng-class="{ 'has-error': addNewForm.nameAndEmail.$invalid }">
+                            <tags-input id ="memberTags" ng-model="SingleParticipantsCtrl.nameAndEmail" class="bootstrap"
+                                        name="tags"
+                                        placeholder="{{'TEXT.NAME_EMAIL'|translate}}"
+                                        add-on-paste = "true"
+                                        paste-split-pattern = "(,|;|\r|\n|\t|\f)"
+                                        replace-spaces-with-dashes = "false"
+                                        allowed-tags-pattern = '(?:"?([^"]*)"?\s)?(?:<?(.+@[^>]+)>?)'
+                                        enable-editing-last-tag = "true"
+                                        allow-leftover-text="true"
+                            </tags-input>
+                        </div>
+                        <BR clear="all">
+                        <h4><small translate="MESSAGE.ADD_PARTICIPANTS"></small></h4>
+                        <BR clear="all">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" translate="BUTTON.CLOSE"></button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" translate="BUTTON.SAVE"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--  Add new Participant Modal -->
