@@ -12,7 +12,8 @@ The app works well on all modern browsers and was tested with Chrome, Firefox, S
 With the use of the AppCache aka manifest file, it also works offline locally up to
 the point where you might want to sync your meeting settings up.
 
-Free accounts on orga.zone are limited to 10 meetings per account.
+Free accounts on orga.zone are limited to 10 meetings per account. Features and more
+screenshots are on [meetingify.com](http://www.meetingify.com/)
 
 Reuse for your own
 --------------------
